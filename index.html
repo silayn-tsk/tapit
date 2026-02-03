@@ -222,8 +222,6 @@ Stay safe till then 🤍`;
         if (j < datatxtletter.length) {
           letterTextEl.textContent += datatxtletter[j++];
           // keep text area scrolled to bottom as it types
-          const box = letterTextEl.closest(".text__letter");
-          box.scrollTop = box.scrollHeight;
         } else {
           clearInterval(intervalContent);
         }

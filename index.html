@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="title" content="Happy Birthday | Swapna" />
-  <title>31</title>
+  <title>Swapna Birthday</title>
 
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -30,8 +30,8 @@
     <div id="fx"></div>
 
     <div class="flag__birthday">
-      <img src="./images/1.png" alt="" width="350" class="flag__left">
-      <img src="./images/1.png" alt="" width="350" class="flag__right">
+      <img src="./1.png" alt="" width="350" class="flag__left">
+      <img src="./1.png" alt="" width="350" class="flag__right">
     </div>
 
     <div class="content">
@@ -55,7 +55,7 @@
             <span style="--t: 6.4s;">y</span>
           </h1>
           <div class="hat">
-            <img src="./images/hat.png" alt="" width="130">
+            <img src="./hat.png" alt="" width="130">
           </div>
         </div>
 
@@ -76,7 +76,7 @@
       <div class="right">
         <div class="box__account">
           <div class="image">
-            <img src="./images/unnamed.png" alt="">
+            <img src="./unnamed.png" alt="">
           </div>
 
           <div class="name">
@@ -86,10 +86,10 @@
           </div>
 
           <div class="balloon_one">
-            <img width="100px" src="./images/balloon1.png" alt="">
+            <img width="100px" src="./balloon1.png" alt="">
           </div>
           <div class="balloon_two">
-            <img width="100px" src="./images/balloon2.png" alt="">
+            <img width="100px" src="./balloon2.png" alt="">
           </div>
         </div>
 
@@ -123,25 +123,25 @@
     <div class="decorate_star star5" style="--t: 15.8s;"></div>
 
     <div class="decorate_flower--one" style="--t: 15s;">
-      <img width="20" src="./images/decorate_flower.png" alt="">
+      <img width="20" src="./decorate_flower.png" alt="">
     </div>
     <div class="decorate_flower--two" style="--t: 15.3s;">
-      <img width="20" src="./images/decorate_flower.png" alt="">
+      <img width="20" src="./decorate_flower.png" alt="">
     </div>
     <div class="decorate_flower--three" style="--t: 15.6s;">
-      <img width="20" src="./images/decorate_flower.png" alt="">
+      <img width="20" src="./decorate_flower.png" alt="">
     </div>
 
     <div class="decorate_bottom">
-      <img src="./images/decorate.png" alt="" width="100">
+      <img src="./decorate.png" alt="" width="100">
     </div>
 
     <div class="smiley__icon">
-      <img src="./images/smiley_icon.png" alt="" width="100">
+      <img src="./smiley_icon.png" alt="" width="100">
     </div>
 
 
-    <!-- Letter modal (FIXED / REQUIRED) -->
+    <!-- Letter modal -->
     <div class="box__letter">
       <div class="letter__border">
         <div class="close">
@@ -153,21 +153,21 @@
 
           <div class="content__letter">
             <div class="left">
-              <img id="heart__letter" src="./images/heart_letter.png" alt="" width="130">
-              <img class="heart heart_1" src="./images/heart.png" alt="" width="30" style="--t: 1s;">
-              <img class="heart heart_2" src="./images/heart.png" alt="" width="30" style="--t: 1.2s;">
-              <img class="heart heart_3" src="./images/heart.png" alt="" width="30" style="--t: 1.4s;">
-              <img class="heart heart_4" src="./images/heart.png" alt="" width="30" style="--t: 1.6s;">
+              <img id="heart__letter" src="./heart_letter.png" alt="" width="130">
+              <img class="heart heart_1" src="./heart.png" alt="" width="30" style="--t: 1s;">
+              <img class="heart heart_2" src="./heart.png" alt="" width="30" style="--t: 1.2s;">
+              <img class="heart heart_3" src="./heart.png" alt="" width="30" style="--t: 1.4s;">
+              <img class="heart heart_4" src="./heart.png" alt="" width="30" style="--t: 1.6s;">
             </div>
 
             <div class="right">
               <div class="love__img">
-                <img src="./images/love.png" alt="" width="120">
+                <img src="./love.png" alt="" width="120">
               </div>
               <div class="text__letter">
                 <p></p>
               </div>
-              <img id="mewmew" src="./images/mewmew.gif" alt="" width="90">
+              <img id="mewmew" src="./mewmew.gif" alt="" width="90">
             </div>
           </div>
         </div>
@@ -181,7 +181,7 @@
       <div class="boxMail-container">
         <div class="card1">
           <div class="userImg">
-            <img src="./images/unnamed.png" alt="">
+            <img src="./unnamed.png" alt="">
           </div>
           <h4 class="username">To: Swapna 💖<span class="underline"></span></h4>
           <h3>Happy Birthday</h3>
@@ -189,7 +189,7 @@
 
         <div class="card2">
           <div class="card2-content">
-            <h3>Hi Swapna 💖!</h3>
+            <h3>To You!</h3>
             <h2>
               Happy birthday to you 🎂🥳🎈 May this year bring you more calm and more moments where you genuinely feel at
               ease 🌿. I always hope we will celebrate many more birthdays like this together 💕.
@@ -222,26 +222,14 @@
       intensity: 30,
       flickering: 50,
       lineStyle: "round",
-      hue: { min: 330, max: 30 }, // pink-ish range
+      hue: { min: 330, max: 30 },
       delay: { min: 20, max: 40 },
     });
 
     function burstConfetti() {
-      confetti({
-        particleCount: 140,
-        spread: 80,
-        origin: { y: 0.65 },
-        scalar: 1.0,
-      });
-
+      confetti({ particleCount: 140, spread: 80, origin: { y: 0.65 }, scalar: 1.0 });
       setTimeout(() => {
-        confetti({
-          particleCount: 90,
-          spread: 120,
-          startVelocity: 30,
-          origin: { y: 0.55 },
-          scalar: 0.9,
-        });
+        confetti({ particleCount: 90, spread: 120, startVelocity: 30, origin: { y: 0.55 }, scalar: 0.9 });
       }, 250);
     }
 
@@ -256,7 +244,6 @@
         startFireworks(7000);
       }, 1800);
     });
-
 
     // ===== Main typing/letter code =====
     let datetxt = "4th February";
@@ -291,8 +278,7 @@ Stay safe till then 🤍`;
         if (currentIndex < charArrDate.length) {
           date__of__birth.textContent += charArrDate[currentIndex];
           currentIndex++;
-        }
-        else {
+        } else {
           let i = document.createElement("i");
           i.className = "fa-solid fa-star"
           document.querySelector(".date__of__birth").prepend(i)
@@ -306,7 +292,6 @@ Stay safe till then 🤍`;
     var intervalTitle;
 
     $("#btn__letter").on("click", function () {
-      // FX on click
       burstConfetti();
       startFireworks(5500);
 
@@ -323,8 +308,7 @@ Stay safe till then 🤍`;
             i.className = "fa-solid fa-heart"
             document.querySelector(".title__letter").appendChild(i)
             currentIndexTitle++;
-          }
-          else {
+          } else {
             clearInterval(intervalTitle)
           }
         }, 80)
@@ -347,8 +331,7 @@ Stay safe till then 🤍`;
           if (currentIndexLetter < charArrDateLetter.length) {
             text__letter.textContent += charArrDateLetter[currentIndexLetter];
             currentIndexLetter++;
-          }
-          else {
+          } else {
             clearInterval(intervalContent)
           }
         }, 22)
@@ -373,7 +356,6 @@ Stay safe till then 🤍`;
       $(".box__letter").slideUp();
       $(".letter__border").slideUp();
     })
-
 
     // ===== Mail box open/close =====
     let mailBox = document.querySelector('.mail')

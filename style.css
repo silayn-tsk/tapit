@@ -863,6 +863,101 @@ body { min-height: 100svh; }
     height: 34px !important;
   }
 }
+/* =========================
+   MAIN PAGE MOBILE LAYOUT
+   ========================= */
+@media (max-width: 768px){
+
+  /* Reduce congestion */
+  .content{
+    flex-direction: column !important;
+    padding-top: 1.2rem !important;
+    gap: 14px !important;
+  }
+
+  .content .left,
+  .content .right{
+    width: 100% !important;
+  }
+
+  /* Make title smaller so it doesn't look zoomed */
+  .title{
+    font-size: 2.1rem !important;
+    letter-spacing: 2px !important;
+  }
+
+  /* Push hat OFF screen at start so it doesn't show immediately */
+  .title .hat{
+    top: -520px !important;       /* hide it initially */
+    right: 8px !important;
+    transform: rotate(-25deg) !important;
+  }
+
+  /* Make the circle photo smaller */
+  .content .right .image{
+    width: 240px !important;
+    height: 240px !important;
+  }
+
+  /* Keep balloons in nicer positions */
+  .right .balloon_one{
+    top: -40px !important;
+    left: -40px !important;
+  }
+  .right .balloon_one img{
+    width: 75px !important;
+  }
+
+  .right .balloon_two{
+    top: 110px !important;
+    right: -35px !important;
+  }
+  .right .balloon_two img{
+    width: 75px !important;
+  }
+
+  /* Move the rotating circle badge away so it doesn't overlap photo */
+  .cricle{
+    top: 20px !important;
+    right: 10px !important;
+    transform: scale(0) !important;
+  }
+
+  /* Date bar width smaller */
+  .date__of__birth{
+    width: 260px !important;
+  }
+  @keyframes dateOfBirth{
+    45%{ width: 260px; height: 0px; }
+    50%,100%{ width: 260px; height: 46px; }
+  }
+
+  /* Button spacing */
+  #btn__letter{
+    margin-top: 10px !important;
+  }
+
+  /* Banner flags: keep even + centered */
+  .flag__birthday{
+    justify-content: center !important;
+    gap: 10px !important;
+  }
+  .flag__birthday .flag__left,
+  .flag__birthday .flag__right{
+    width: 160px !important;
+    transform: none !important;  /* remove uneven tilt/shift */
+  }
+
+  /* Decorative bottom stuff not too crowded */
+  .decorate_bottom img{
+    width: 80px !important;
+  }
+  .smiley__icon{
+    left: 50% !important;
+    bottom: 110px !important;
+    transform: translateX(-50%) scale(0) !important;
+  }
+}
 /* Fullscreen FX overlay (fireworks) */
 #fx {
   position: fixed;

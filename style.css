@@ -111,20 +111,21 @@ body{
 .hat{
   position:absolute;
   width:120px;
-  right: 34px;        /* tuned so it sits near Y */
-  top: -500px;        /* start hidden */
-  z-index:2;          /* BEHIND text */
+  right: 34px;
+  top: -500px;
+  z-index:2;
   animation: hatDrop 2.8s 1.05s forwards ease;
 }
 .hat img{ width:100%; height:auto; display:block; }
 
 @keyframes hatDrop{
   0%   { top:-500px; transform: rotate(-18deg); }
-  55%  { top:-140px; transform: rotate(-8deg); }  /* lands around HAPPY */
-  75%  { top:-140px; transform: rotate(10deg); }  /* tilt once (behind) */
-  100% { top:-62px;  transform: rotate(0deg); }   /* final near Y */
+  55%  { top:-140px; transform: rotate(-8deg); }
+  75%  { top:-140px; transform: rotate(10deg); }
+  100% { top:-62px;  transform: rotate(0deg); }
 }
 
+/* date */
 .date__of__birth{
   margin-top: 14px;
   margin-bottom: 10px;
@@ -139,18 +140,16 @@ body{
   font-family: "Sriracha", cursive;
   font-weight:bold;
 
-  /* hidden first */
   opacity: 0;
   transform: translateY(-12px);
   animation: showDate 0.6s 2.55s forwards ease;
 }
-
 @keyframes showDate{
   to{ opacity:1; transform: translateY(0); }
 }
 .date__of__birth span{ font-size: 1.1rem; }
 
-/* button */
+/* button appear after date */
 .btn{
   margin-top: 6px;
   opacity: 0;
@@ -160,36 +159,36 @@ body{
 @keyframes showBtn{
   to{ opacity:1; transform: scale(1); }
 }
-}
-/* FORCE the button to look like the original pill */
+
+/* FORCE the button to be a pink pill */
 #btn__letter{
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 8px !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 
-  background: var(--text-pink) !important;
-  border: 3px solid var(--black) !important;
-  border-radius: 999px !important;
+  background: var(--text-pink);
+  border: 3px solid var(--black);
+  border-radius: 999px;
 
-  padding: 10px 18px !important;
-  min-width: 230px !important;
-  height: 48px !important;
+  padding: 10px 18px;
+  min-width: 240px;
+  height: 48px;
 
-  font-family: "Sriracha", cursive !important;
-  font-size: 1rem !important;
-  color: #111 !important;
+  font-family: "Sriracha", cursive;
+  font-size: 1rem;
+  color: #111;
 
-  appearance: none !important;
-  -webkit-appearance: none !important;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
 }
 
 #btn__letter .mail{
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 8px !important;
-  width: 100% !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 /* photo block */
@@ -215,10 +214,11 @@ body{
   display:block;
 }
 
+/* ✅ Dear Swapna = bottom label under the circle */
 .name{
   position:absolute;
-  bottom:-20px;
   left:50%;
+  bottom:-20px;
   transform: translateX(-50%);
   display:flex;
   align-items:center;
@@ -226,28 +226,20 @@ body{
   gap: 14px;
   background: var(--text-pink);
   border:3px solid var(--black);
-  border-radius:50px;
-  padding: 6px 18px;
+  border-radius:999px;
+  padding: 8px 18px;
   font-family:'Dancing Script', cursive;
-}
-/* Name tag on the side (vertical) */
-.name{
-  bottom: auto !important;
-  left: auto !important;
-  top: 50% !important;
-  right: -62px !important;
-  transform: translateY(-50%) rotate(90deg) !important;
-  transform-origin: center !important;
+  z-index:10;
 }
 .name span{ font-size: 1.7rem; font-weight:bold; }
 
-/* smiley BELOW name */
+/* ✅ Smiley BELOW the name label */
 .smiley__icon{
   position:absolute;
   left:50%;
-  bottom:-75px;
+  bottom:-105px;
   transform: translateX(-50%);
-  z-index:6;
+  z-index:9;
 }
 .smiley__icon img{ width: 85px; height:auto; display:block; }
 
@@ -283,6 +275,7 @@ body{
   background: var(--text-pink);
   border: 5px solid var(--black);
   animation: spin 5s linear infinite;
+  position:relative;
 }
 @keyframes spin{ to{ transform: rotate(360deg);} }
 
@@ -302,7 +295,7 @@ body{
 }
 
 /* =========================
-   LETTER MODAL (fixed height, no growth)
+   LETTER MODAL
    ========================= */
 .box__letter{
   position:fixed;
@@ -317,12 +310,12 @@ body{
 
 .letter__border{
   width: min(800px, 92vw);
-  height: min(640px, 86svh);   /* FIXED height */
+  height: min(640px, 86svh);
   background:#fff;
   border-radius: 22px;
   padding: 14px;
   box-shadow: rgba(0,0,0,.25) 0px 6px 18px;
-  overflow:hidden;             /* IMPORTANT: prevent growing */
+  overflow:hidden;
   position:relative;
 }
 
@@ -384,7 +377,7 @@ body{
   position:relative;
   display:flex;
   flex-direction:column;
-  min-height:0; /* allow inner scroll */
+  min-height:0;
 }
 
 .love__img{
@@ -400,14 +393,13 @@ body{
   font-family:'Dancing Script', cursive;
   font-size: 1.1rem;
   line-height: 1.6;
-  overflow-y:auto;             /* SCROLL inside */
+  overflow-y:auto;
   min-height:0;
   flex: 1;
   white-space: pre-line;
   -webkit-overflow-scrolling: touch;
 }
 
-/* mewmew ALWAYS visible */
 #mewmew{
   width: 70px;
   height:auto;
@@ -441,7 +433,6 @@ body{
 
   .title{ font-size: 2.3rem; }
 
-  /* keep hat behind + placed on Y */
   .hat{
     width: 115px;
     right: 18px;
@@ -459,13 +450,19 @@ body{
   .balloon_two{ top:115px; right:-40px; }
   .balloon_two img{ width:78px; }
 
-  .smiley__icon{ bottom:-92px; }
+  /* keep label + smiley aligned */
+  .name{
+    bottom:-18px;
+    padding: 8px 16px;
+  }
+  .name span{ font-size: 1.45rem; }
+
+  .smiley__icon{ bottom:-95px; }
   .smiley__icon img{ width: 82px; }
 
-  /* letter modal mobile */
   .letter__border{
     width: 94vw;
-    height: 86svh;     /* fixed */
+    height: 86svh;
   }
   .title__letter{ font-size: 1.35rem; }
   .content__letter{
@@ -488,18 +485,5 @@ body{
     width: 60px;
     bottom: 6px;
     left: 6px;
-  }@media (max-width: 768px){
-  /* Side name tag: smaller + shifted outside the circle */
-  .name{
-    top: 52% !important;
-    right: -95px !important;              /* push it further out */
-    transform: translateY(-50%) rotate(90deg) scale(0.78) !important;
-    padding: 6px 14px !important;
   }
-
-  .name span{
-    font-size: 1.25rem !important;
-    margin: 0 18px !important;
-  }
-}
 }

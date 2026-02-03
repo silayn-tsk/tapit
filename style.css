@@ -781,89 +781,86 @@ body {
 }
 
 /* =========================
-   MOBILE LETTER POPUP FIX
+   MOBILE FIXES (IMPORTANT)
    ========================= */
-@media screen and (max-width: 768px) {
 
-  /* Overlay stays centered */
-  .box__letter {
-    align-items: center;
-    justify-content: center;
-  }
+/* Better mobile height handling (Safari address bar) */
+html, body { height: auto; }
+body { min-height: 100svh; }
+#wrapper { min-height: 100svh; }
+
+/* When jQuery slideDown sets display:block, force flex back */
+.box__letter[style*="display: block"]{
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Mobile letter popup */
+@media (max-width: 768px) {
 
   /* Popup container */
-  .box__letter .letter__border {
-    width: 92vw;
-    max-height: 88vh;
-    height: auto;
-    padding: 12px;
-    border-radius: 20px;
+  .box__letter .letter__border{
+    width: 92vw !important;
+    max-height: 86svh !important;
+    height: auto !important;
+    padding: 12px !important;
+    border-radius: 18px !important;
+    overflow: hidden !important;
   }
 
-  /* Inner paper */
-  .letter__border .letter {
-    padding-top: 10px;
+  /* Stack layout */
+  .letter__border .letter .content__letter{
+    flex-direction: column !important;
+    padding-top: 8px !important;
+    padding-bottom: 12px !important;
   }
 
-  /* Title */
-  .letter__border .letter .title__letter {
-    font-size: 1.4rem;
-    margin-bottom: 8px;
+  /* REMOVE the left panel completely (this fixes the big pink overlay) */
+  .content__letter .left{
+    display: none !important;
   }
 
-  /* Layout becomes vertical */
-  .letter__border .letter .content__letter {
-    flex-direction: column;
-    padding-top: 0.5rem;
-    padding-bottom: 10px;
+  /* Right side full width */
+  .content__letter .right{
+    width: 100% !important;
   }
 
-  /* LEFT side (hearts image) */
-  .content__letter .left {
-    width: 100%;
-    height: auto;
-    border-right: none;
-    display: flex;
-    justify-content: center;
-    padding: 10px 0;
+  /* Title smaller */
+  .letter__border .letter .title__letter{
+    font-size: 1.25rem !important;
+    margin-bottom: 6px !important;
   }
 
-  #heart__letter {
-    width: 90px;
+  /* Scroll message INSIDE the popup */
+  .content__letter .right .text__letter{
+    margin-top: 0 !important;
+    padding: 10px 10px !important;
+    font-size: 0.98rem !important;
+    line-height: 1.6 !important;
+    max-height: 58svh !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    white-space: pre-line !important;
   }
 
-  /* Hide floating hearts on mobile (cleaner) */
-  .content__letter .left .heart {
-    display: none;
+  /* Keep gif small and not covering text */
+  #mewmew{
+    width: 60px !important;
+    height: auto !important;
+    position: relative !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    margin-top: 6px !important;
+    opacity: 1 !important; /* always visible on mobile */
   }
 
-  /* RIGHT side (text) */
-  .content__letter .right {
-    width: 100%;
-    position: relative;
-  }
-
-  .content__letter .right .text__letter {
-    margin-top: 5px;
-    padding: 10px;
-    font-size: 0.95rem;
-    line-height: 1.6;
-    max-height: 45vh;
-    overflow-y: auto;
-    white-space: pre-line;
-  }
-
-  /* Cute gif */
-  #mewmew {
-    width: 70px;
-    margin-top: 5px;
-  }
-
-  /* Close button easier to tap */
-  .letter__border .close {
-    width: 34px;
-    height: 34px;
-    font-size: 18px;
+  /* Close button reachable */
+  .letter__border .close{
+    right: 6px !important;
+    top: 6px !important;
+    width: 34px !important;
+    height: 34px !important;
   }
 }
 /* Fullscreen FX overlay (fireworks) */

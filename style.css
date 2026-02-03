@@ -417,112 +417,176 @@ body{
   z-index: 9999;
 }
 
+/* ✅ Force letter overlay to be centered (iPhone + jQuery .show() sets display:block) */
+.box__letter[style*="display: block"]{
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* ✅ Keep mewmew always visible even after typing ends */
+#mewmew{
+  position: sticky !important;
+  bottom: 10px !important;
+  margin-left: auto !important;
+  display: block !important;
+  opacity: 1 !important;
+  height: auto !important;
+}
+
+/* ✅ Hat: drop from top of Happy, tilt once when Birthday appears */
+.title .hat{
+  top: -520px;        /* hidden at start */
+  right: 10px;
+  z-index: 6;
+  animation: topHat 3.2s 1.6s forwards ease;
+}
+
+@keyframes topHat{
+  0%{
+    top: -520px;
+    transform: rotate(-25deg);
+  }
+  45%{
+    top: -140px;      /* lands near HAPPY */
+    transform: rotate(-10deg);
+  }
+  65%{
+    top: -140px;      /* tilt once when BIRTHDAY pops */
+    transform: rotate(10deg);
+  }
+  100%{
+    top: -32px;       /* final resting near title */
+    transform: rotate(0deg);
+  }
+}
+
+/* ✅ Smiley BELOW Dear Swapna (since it's now inside .box__account) */
+.box__account .smiley__icon{
+  position: absolute;
+  left: 50%;
+  bottom: -90px;              /* below the name pill */
+  transform: translateX(-50%);
+  z-index: 9;
+  opacity: 1;
+  visibility: visible;
+  animation: none;
+}
+.box__account .smiley__icon img{
+  width: 85px;
+}
+
 /* =========================
    MOBILE MAIN PAGE PERFECT
    ========================= */
 @media (max-width: 768px){
+
+  /* stop "zoomed" feeling + avoid horizontal overflow */
+  body, #wrapper{ overflow-x: hidden; }
+
+  /* Banner flags even */
   .flag__birthday{
-    justify-content: center;
-    gap: 10px;
+    justify-content: center !important;
+    gap: 10px !important;
   }
   .flag__birthday img{
-    width: 170px;
-    max-width: 46vw;
+    width: 170px !important;
+    max-width: 46vw !important;
     transform: none !important;
   }
 
+  /* Stack layout */
   .content{
-    flex-direction: column;
-    padding-top: 1.0rem;
-    gap: 10px;
+    flex-direction: column !important;
+    padding-top: 1.0rem !important;
+    gap: 10px !important;
   }
-  .content .left, .content .right{ width:100%; }
+  .content .left, .content .right{
+    width: 100% !important;
+  }
 
+  /* Title sizing */
   .title{
-    font-size: 2.3rem;
+    font-size: 2.3rem !important;
   }
 
-  /* Hat should NOT be visible at start, but should drop later */
-  .title .hat{
-    top: -360px;
-    right: 10px;
-    z-index: 6;
-  }
-
+  /* Date MUST be between title and button */
   .date__of__birth{
-    margin-top: 10px;
+    margin-top: 14px !important;
+    margin-bottom: 10px !important;
+    z-index: 8 !important;
+  }
+  .left .btn{
+    margin-top: 0 !important;
   }
 
+  /* Photo size (bigger like before) */
   .content .right .image{
-    width: 280px;
-    height: 280px;
+    width: 300px !important;
+    height: 300px !important;
   }
 
+  /* Balloons nicer */
   .right .balloon_one{
-    top: -45px;
-    left: -45px;
+    top: -45px !important;
+    left: -45px !important;
   }
-  .right .balloon_one img{ width: 78px; }
+  .right .balloon_one img{ width: 78px !important; }
 
   .right .balloon_two{
-    top: 115px;
-    right: -40px;
+    top: 115px !important;
+    right: -40px !important;
   }
-  .right .balloon_two img{ width: 78px; }
+  .right .balloon_two img{ width: 78px !important; }
 
+  /* Badge position */
   .cricle{
-    top: 18px;
-    right: 14px;
+    top: 18px !important;
+    right: 14px !important;
   }
 
-  .decorate_bottom img{ width: 85px; }
-  .smiley__icon{
-    left: 50%;
-    bottom: 130px;
-    transform: translateX(-50%) scale(0);
+  /* Smiley below name */
+  .box__account .smiley__icon{
+    bottom: -95px !important;
   }
 
-  /* Keep letter popup nice on mobile */
+  /* Letter popup stays centered and readable */
   .box__letter .letter__border{
-    width: 94vw;
-    max-height: 86svh;
+    width: 94vw !important;
+    max-height: 86svh !important;
   }
-  .title__letter{ font-size: 1.35rem; }
+  .title__letter{
+    font-size: 1.35rem !important;
+  }
   .content__letter{
-    flex-direction: column;
-    height: auto;
+    flex-direction: column !important;
+    height: auto !important;
   }
   .content__letter .left{
-    width: 100%;
-    border-right: none;
-    border-bottom: 3px solid var(--color-border);
-    display:flex;
-    justify-content:center;
-    padding: 10px 0;
+    width: 100% !important;
+    border-right: none !important;
+    border-bottom: 3px solid var(--color-border) !important;
+    display: flex !important;
+    justify-content: center !important;
+    padding: 10px 0 !important;
   }
   .content__letter .right{
-    width: 100%;
+    width: 100% !important;
   }
   .love__img{
-    position: relative;
-    top: 0;
-    right: 0;
-    display:flex;
-    justify-content:center;
-    margin-top: 6px;
+    position: relative !important;
+    top: 0 !important;
+    right: 0 !important;
+    display: flex !important;
+    justify-content: center !important;
+    margin-top: 6px !important;
   }
   .text__letter{
-    margin-top: 6px;
-    max-height: 52svh;
-    font-size: 1rem;
+    margin-top: 6px !important;
+    max-height: 52svh !important;
+    font-size: 1rem !important;
   }
   #mewmew{
-    position: relative;
-    opacity: 1;
-    bottom: 0;
-    right: 0;
-    display:block;
-    margin: 6px auto 0 auto;
-    width: 60px;
+    width: 60px !important;
   }
 }

@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>Valentine?</title>
+  <style>
+    :root{
+      --bg1:#ff6aa2;
+      --bg2:#ff9ec9;
+      --card:#ffffffd9;
+      --text:#1f1f1f;
+      --yes:#22c55e;
+      --no:#ef4444;
+      --wa:#25D366;
+      --call:#3b82f6;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      overflow:hidden;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 600px at 20% 20%, #fff 0%, transparent 55%),
+                  linear-gradient(135deg, var(--bg1), var(--bg2));
+      color:var(--text);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Soft sparkles */
+    .sparkle{
+      position:absolute; inset:-50px; pointer-events:none;
+      background:
+        radial-gradient(circle at 10% 20%, rgba(255,255,255,.35) 0 2px, transparent 3px),
+        radial-gradient(circle at 70% 10%, rgba(255,255,255,.28) 0 2px, transparent 3px),
+        radial-gradient(circle at 90% 60%, rgba(255,255,255,.25) 0 2px, transparent 3px),
+        radial-gradient(circle at 25% 80%, rgba(255,255,255,.22) 0 2px, transparent 3px);
+      animation: drift 10s ease-in-out infinite alternate;
+      opacity:.75;
+    }
+    @keyframes drift{
+      from{transform:translate3d(-10px,-10px,0)}
+      to{transform:translate3d(10px,10px,0)}
+    }
+
+    /* Floating heart balloons */
+    .balloons{ position:absolute; inset:0; pointer-events:none; overflow:hidden; }
+    .balloon{
+      position:absolute;
+      width:34px; height:34px;
+      transform: translate(-50%, -50%);
+      filter: drop-shadow(0 10px 14px rgba(0,0,0,.12));
+      opacity:.95;
+      animation: floatUp linear infinite, sway ease-in-out infinite;
+    }
+    .balloon::before,.balloon::after{
+      content:"";
+      position:absolute;
+      width:18px; height:28px;
+      background: var(--c);
+      border-radius: 18px 18px 0 0;
+      top:6px; left:8px;
+      transform: rotate(-45deg);
+      transform-origin: 0 100%;
+    }
+    .balloon::after{
+      left:18px;
+      transform: rotate(45deg);
+      transform-origin: 100% 100%;
+    }
+    .string{
+      position:absolute; left:50%; top:34px;
+      width:2px; height:34px;
+      background: rgba(0,0,0,.15);
+      transform: translateX(-50%);
+      border-radius:2px;
+    }
+    @keyframes floatUp{
+      from{ transform: translate(-50%, 110vh) scale(var(--s)) }
+      to{   transform: translate(-50%, -20vh) scale(var(--s)) }
+    }
+    @keyframes sway{
+      0%,100%{ margin-left: -12px }
+      50%{ margin-left: 12px }
+    }
+
+    .center{ position:absolute; inset:0; display:grid; place-items:center; padding:18px; }
+    .card{
+      width:min(720px, 94vw);
+      background:var(--card);
+      backdrop-filter: blur(10px);
+      border:1px solid rgba(255,255,255,.65);
+      border-radius:26px;
+      padding:24px 18px 22px;
+      box-shadow: 0 18px 60px rgba(0,0,0,.18);
+      text-align:center;
+      position:relative;
+    }
+
+    h1{ margin:0 0 10px; font-size: clamp(28px, 5.2vw, 48px); line-height:1.05; }
+    .sub{ margin:0 0 18px; font-size: clamp(14px, 3.2vw, 18px); opacity:.86; }
+
+    .buttons{
+      display:flex;
+      gap:14px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-top:12px;
+      position:relative;
+      min-height:64px;
+    }
+
+    button, a.action{
+      border:none;
+      cursor:pointer;
+      font-size:18px;
+      font-weight:900;
+      padding:16px 22px;
+      border-radius:999px;
+      box-shadow: 0 10px 25px rgba(0,0,0,.12);
+      transition: transform .12s ease, filter .12s ease;
+      user-select:none;
+      touch-action: manipulation;
+      min-width:160px;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+    }
+    button:active, a.action:active{transform:scale(.98)}
+    button:disabled{opacity:.75; cursor:default}
+
+    #yesBtn{background:linear-gradient(180deg, #3be37b, var(--yes)); color:#053216}
+    #noBtn{background:linear-gradient(180deg, #ff6b6b, var(--no)); color:#3a0b0b; position:relative}
+
+    .msg{ margin-top:16px; display:none; font-size: clamp(16px, 3.6vw, 22px); font-weight:900; }
+    .msg span{
+      display:inline-block;
+      padding:10px 14px;
+      border-radius:16px;
+      background: rgba(255, 255, 255, .72);
+      border: 1px solid rgba(255,255,255,.75);
+    }
+
+    .actions{
+      margin-top:14px;
+      display:none;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+    .wa{ background:linear-gradient(180deg, #53e68b, var(--wa)); color:#063517 }
+    .call{ background:linear-gradient(180deg, #76a7ff, var(--call)); color:#061b3a }
+
+    /* Blur photo reveal */
+    .photoWrap{
+      display:none;
+      margin-top:18px;
+    }
+    .photoCard{
+      width:100%;
+      max-width:320px;
+      margin: 0 auto;
+      border-radius:22px;
+      overflow:hidden;
+      position:relative;
+      box-shadow: 0 14px 40px rgba(0,0,0,.25);
+      cursor:pointer;
+      user-select:none;
+      outline: none;
+    }
+    .photoCard img{
+      width:100%;
+      display:block;
+      transform: scale(1.03);
+      filter: blur(18px) brightness(.9);
+      transition: filter .55s ease, transform .55s ease;
+    }
+    .revealHint{
+      position:absolute;
+      inset:0;
+      display:grid;
+      place-items:center;
+      font-weight:900;
+      font-size:18px;
+      color: rgba(255,255,255,.95);
+      text-shadow: 0 10px 22px rgba(0,0,0,.35);
+      background: rgba(0,0,0,.16);
+      transition: opacity .4s ease;
+    }
+    .photoCard.revealed img{
+      filter: blur(0px) brightness(1);
+      transform: scale(1);
+    }
+    .photoCard.revealed .revealHint{
+      opacity:0;
+      pointer-events:none;
+    }
+    .caption{
+      margin-top:10px;
+      font-weight:900;
+      font-size:18px;
+    }
+
+    /* Hearts pop on YES */
+    .pop{ position:absolute; inset:0; pointer-events:none; display:none; }
+    .pop i{
+      position:absolute;
+      font-style:normal;
+      animation: pop 900ms ease-out forwards;
+      opacity:0;
+      font-size:18px;
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,.12));
+    }
+    @keyframes pop{
+      0%{transform: translate(0,0) scale(.6); opacity:0}
+      10%{opacity:1}
+      100%{transform: translate(var(--dx), var(--dy)) scale(1.2); opacity:0}
+    }
+
+    .footer{ margin-top:12px; font-size:12px; opacity:.62; }
+
+    @media (max-width: 380px){
+      button, a.action{min-width:145px; padding:15px 18px}
+      .card{padding:20px 14px}
+    }
+  </style>
+</head>
+<body>
+  <div class="sparkle"></div>
+  <div class="balloons" id="balloons"></div>
+
+  <div class="center">
+    <div class="card" id="card">
+      <h1>Will you be my Valentine? 💘</h1>
+      <p class="sub">Choose wisely… 😄</p>
+
+      <div class="buttons" id="btnWrap">
+        <button id="yesBtn">Yes 💖</button>
+        <button id="noBtn">No 🙈</button>
+      </div>
+
+      <div class="msg" id="msg">
+        <span>💞 I knew you’d say yes! Pick one 😌</span>
+      </div>
+
+      <div class="actions" id="actions">
+        <a class="action wa" id="waLink" href="#" target="_blank" rel="noopener">WhatsApp 💬</a>
+        <a class="action call" id="callLink" href="tel:+60176383913">Call me now 📞</a>
+      </div>
+
+      <div class="photoWrap" id="photoWrap">
+        <div class="photoCard" id="photoCard" role="button" tabindex="0" aria-label="Reveal photo">
+          <img id="valPhoto" src="her.jpg" alt="My favorite person 💖" />
+          <div class="revealHint" id="revealHint">Tap to reveal 💖</div>
+        </div>
+        <div class="caption">My favorite person 💖</div>
+      </div>
+
+      <div class="pop" id="pop"></div>
+      <div class="footer">Tip: the “No” button is a bit shy.</div>
+    </div>
+  </div>
+
+  <script>
+    // ---------- Heart balloons ----------
+    const balloonsEl = document.getElementById('balloons');
+    const colors = ["#ff2d55","#ff4d6d","#ff6aa2","#ff2d9a","#ff3b30","#ff5ea8"];
+
+    function makeBalloon() {
+      const b = document.createElement('div');
+      b.className = 'balloon';
+
+      const s = (Math.random() * 0.9 + 0.6).toFixed(2);
+      const dur = (Math.random() * 6 + 8).toFixed(2); // 8-14s
+      const sway = (Math.random() * 2 + 2).toFixed(2); // 2-4s
+      const left = (Math.random() * 100).toFixed(2);
+
+      b.style.setProperty('--c', colors[Math.floor(Math.random() * colors.length)]);
+      b.style.setProperty('--s', s);
+      b.style.left = left + 'vw';
+      b.style.animationDuration = `${dur}s, ${sway}s`;
+      b.style.animationDelay = `${(Math.random()*-dur).toFixed(2)}s, 0s`;
+
+      const str = document.createElement('div');
+      str.className = 'string';
+      b.appendChild(str);
+
+      balloonsEl.appendChild(b);
+      setTimeout(() => b.remove(), (parseFloat(dur) + 2) * 1000);
+    }
+    for (let i = 0; i < 16; i++) makeBalloon();
+    setInterval(makeBalloon, 650);
+
+    // ---------- No button dodging (mobile-friendly) ----------
+    const card = document.getElementById('card');
+    const btnWrap = document.getElementById('btnWrap');
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const msg = document.getElementById('msg');
+    const pop = document.getElementById('pop');
+    const actions = document.getElementById('actions');
+    const photoWrap = document.getElementById('photoWrap');
+
+    let dodging = false;
+    const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
+
+    function ensureAbsolute() {
+      if (dodging) return;
+      const r = noBtn.getBoundingClientRect();
+      const wr = btnWrap.getBoundingClientRect();
+      btnWrap.style.position = 'relative';
+      noBtn.style.position = 'absolute';
+      noBtn.style.left = (r.left - wr.left) + 'px';
+      noBtn.style.top  = (r.top  - wr.top)  + 'px';
+      dodging = true;
+    }
+
+    function moveNoButton() {
+      ensureAbsolute();
+      const wr = btnWrap.getBoundingClientRect();
+      const bw = noBtn.offsetWidth;
+      const bh = noBtn.offsetHeight;
+
+      const pad = 6;
+      const maxX = wr.width  - bw - pad;
+      const maxY = Math.max(64, wr.height) - bh - pad;
+
+      const x = Math.random() * (maxX - pad) + pad;
+      const y = Math.random() * (maxY - pad) + pad;
+
+      noBtn.style.left = clamp(x, pad, maxX) + 'px';
+      noBtn.style.top  = clamp(y, pad, maxY) + 'px';
+    }
+
+    noBtn.addEventListener('mouseenter', moveNoButton);
+    noBtn.addEventListener('mouseover', moveNoButton);
+
+    noBtn.addEventListener('pointerdown', (e) => {
+      e.preventDefault();
+      moveNoButton();
+    });
+
+    card.addEventListener('pointermove', (e) => {
+      const r = noBtn.getBoundingClientRect();
+      const cx = r.left + r.width/2;
+      const cy = r.top + r.height/2;
+      const dist = Math.hypot(e.clientX - cx, e.clientY - cy);
+
+      const coarse = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+      const radius = coarse ? 150 : 95;
+
+      if (dist < radius) moveNoButton();
+    }, { passive: true });
+
+    // ---------- WhatsApp prefilled message ----------
+    const waLink = document.getElementById('waLink');
+    const phoneE164 = "60176383913"; // no plus for wa.me
+    const prefilled = "I said YES! 💞 You are my Valentine 😘";
+    waLink.href = `https://wa.me/${phoneE164}?text=${encodeURIComponent(prefilled)}`;
+
+    // ---------- Photo reveal ----------
+    const photoCard = document.getElementById('photoCard');
+    function revealPhoto(){ photoCard.classList.add('revealed'); }
+    photoCard.addEventListener('click', revealPhoto);
+    photoCard.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') revealPhoto();
+    });
+
+    // ---------- Hearts pop on YES ----------
+    function heartPop(x, y) {
+      pop.style.display = 'block';
+      const hearts = ["💗","💖","💘","💝","💞"];
+      for (let i = 0; i < 18; i++) {
+        const el = document.createElement('i');
+        el.textContent = hearts[Math.floor(Math.random()*hearts.length)];
+        el.style.left = x + "px";
+        el.style.top  = y + "px";
+        el.style.setProperty("--dx", (Math.random()*260 - 130).toFixed(0) + "px");
+        el.style.setProperty("--dy", (Math.random()*-220 - 40).toFixed(0) + "px");
+        el.style.animationDelay = (Math.random()*120).toFixed(0) + "ms";
+        pop.appendChild(el);
+        setTimeout(() => el.remove(), 1100);
+      }
+      setTimeout(() => { if (!pop.children.length) pop.style.display = 'none'; }, 1200);
+    }
+
+    yesBtn.addEventListener('click', () => {
+      msg.style.display = 'block';
+      actions.style.display = 'flex';
+      photoWrap.style.display = 'block';
+
+      yesBtn.disabled = true;
+      noBtn.style.display = 'none';
+
+      document.querySelector('h1').textContent = "Yay!! 💞";
+      document.querySelector('.sub').textContent = "Now message me or call me 😌";
+
+      const cr = card.getBoundingClientRect();
+      const r = yesBtn.getBoundingClientRect();
+      heartPop((r.left + r.width/2) - cr.left, (r.top + r.height/2) - cr.top);
+    });
+
+    window.addEventListener('resize', () => { if (dodging) moveNoButton(); });
+  </script>
+</body>
+</html>

@@ -161,10 +161,26 @@ body{
   to{ opacity:1; transform: scale(1); }
 }
 }
-#btn__letter:hover{
-  background: var(--heart);
-  border-color: var(--heart);
-  color:#fff;
+#btn__letter{
+  border: 3px solid var(--black);
+  border-radius: 50px;
+  padding: 10px 18px;
+  background: var(--text-pink);
+  font-family:"Sriracha", cursive;
+  font-size: 1rem;
+  cursor:pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  /* IMPORTANT: remove browser default */
+  appearance: none;
+  -webkit-appearance: none;
+}#btn__letter .mail{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 /* photo block */
@@ -205,13 +221,22 @@ body{
   padding: 6px 18px;
   font-family:'Dancing Script', cursive;
 }
+/* Name tag on the side (vertical) */
+.name{
+  bottom: auto !important;
+  left: auto !important;
+  top: 50% !important;
+  right: -62px !important;
+  transform: translateY(-50%) rotate(90deg) !important;
+  transform-origin: center !important;
+}
 .name span{ font-size: 1.7rem; font-weight:bold; }
 
 /* smiley BELOW name */
 .smiley__icon{
   position:absolute;
   left:50%;
-  bottom:-102px;
+  bottom:-75px;
   transform: translateX(-50%);
   z-index:6;
 }
